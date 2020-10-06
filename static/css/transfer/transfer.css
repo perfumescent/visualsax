@@ -1,0 +1,19 @@
+html, body {
+    height: 100%;
+}
+
+.my-transfer {
+    padding-top: 100px;
+    height: 100%;
+    background: url(../../images/transfer/bg-1.jpg) no-repeat center center;
+    background-size: 100% 100%;
+}
+
+.my-transfer section {
+    margin: 0 auto;
+    width: 368px;
+}
+
+.my-transfer i {
+    font-size: 20px;
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SAX Visualization-Initialize Parameter</title>
+</head>
+<body>
+<a href="{{url_for('homepage')}}">Homepage</a>
+<a href="{{url_for('profile')}}">User profile</a>
+<a href="{{url_for('logout')}}">Log out</a>
+<br>
+<br>
+<form method="post">  <!-- 指定提交方法为 POST -->
+    <label for="index">Instance ID</label>
+    <input type="text" name="index" id="index">  <!-- 文本输入框 -->
+    <label for="paa_size">PAA size</label>
+    <input type="text" name="paa_size" id="paa_size">  <!-- 文本输入框 -->
+    <label for="sax_size">SAX size</label>
+    <input type="text" name="sax_size" id="sax_size"> <!-- 文本输入框 -->
+    <label for="sliding_size">Sliding Widow size</label>
+    <input type="text" name="sliding_size" id="sliding_size"> <!-- 文本输入框 -->
+    <input type="submit" name="submit" value="Analyze">  <!-- 提交按钮 -->
+</form>
+<br>
+<br>
+<br>
+<br>
+<h1>这里放的是一个可交互的、能处理大量数据的表格，用来展示用户刚上传的数据集</h1>
+</body>
+</html>

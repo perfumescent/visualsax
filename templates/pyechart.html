@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>SAX Visualization - Analyze & Visualize</title>
+    <script src="../static/jquery.min.js"></script>
+    <script type="text/javascript" src="../static/echarts.min.js"></script>
+</head>
+<body>
+<a href="{{ url_for('homepage') }}">Homepage</a>
+<a href="{{ url_for('profile') }}">User profile</a>
+<a href="{{ url_for('initialize') }}">Initialize Parameter</a>
+<a href="{{ url_for('logout') }}">Log out</a>
+<br>
+<br>
+<form method="post">  <!-- 指定提交方法为 POST -->
+    <label for="index">Instance ID</label>
+    <input type="text" name="index" id="index">  <!-- 文本输入框 -->
+    <label for="paa_size">PAA size</label>
+    <input type="text" name="paa_size" id="paa_size">  <!-- 文本输入框 -->
+    <label for="sax_size">SAX size</label>
+    <input type="text" name="sax_size" id="sax_size"> <!-- 文本输入框 -->
+    <label for="sliding_size">Sliding Widow size</label>
+    <input type="text" name="sliding_size" id="sliding_size"> <!-- 文本输入框 -->
+    <input type="submit" name="submit" value="Analyze">  <!-- 提交按钮 -->
+</form>
+<br>
+<b>Current Parameter: </b>
+<br>
+Instance ID: {{ session['index'] }}&emsp;
+PAA size: {{ session['paa_size'] }}&emsp;
+SAX size: {{ session['sax_size'] }} &emsp;
+Sliding Window size: {{ session['sliding_size'] }}
+<br>
+<br>
+<label for="mtpl"><b>SAX by matplotlib</b></label>
+<img src="{{ chart_mtpl }}" id="mtpl" alt="chart_matplotlib" style="margin: 0 auto;">
+<br>
+<br>
+<br>
+<br>
+<div id="chart_sax" style="width:100%; height:600px"></div>
+<br>
+<br>
+<br>
+<br>
+<div id="chart_original" style="width:100%; height:600px;"></div>
+<br>
+<br>
+<br>
+<br>
+<div id="chart_sliding" style="width:100%; height:600px;"></div>
+
+</body>
+<script>
+    $(
+        function () {
+            var chart = echarts.init(document.getElementById('chart_sax'), 'white', {renderer: 'canvas'});
+            $.ajax({
+                type: "GET",
+                url: "http://127.0.0.1:5000/chart_sax",
+                dataType: 'json',
+                success: function (result) {
+                    chart.setOption(result);
+                }
+            });
+        }
+    );
+
+    $(
+        function () {
+            var chart = echarts.init(document.getElementById('chart_original'), 'white', {renderer: 'canvas'});
+            $.ajax({
+                type: "GET",
+                url: "http://127.0.0.1:5000/chart_original",
+                dataType: 'json',
+                success: function (result) {
+                    chart.setOption(result);
+                }
+            });
+        }
+    );
+
+    $(
+        function () {
+            var chart = echarts.init(document.getElementById('chart_sliding'), 'white', {renderer: 'canvas'});
+            $.ajax({
+                type: "GET",
+                url: "http://127.0.0.1:5000/chart_sliding",
+                dataType: 'json',
+                success: function (result) {
+                    chart.setOption(result);
+                }
+            });
+        }
+    );
+
+</script>
+</html>

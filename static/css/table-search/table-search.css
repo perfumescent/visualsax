@@ -1,0 +1,38 @@
+body {
+    background-color: #f0f2f5;
+}
+
+.container-fluid, .container-lg, .container-md, .container-sm, .container-xl {
+    padding-right: 24px;
+    padding-left: 24px;
+}
+
+.table-search-header {
+    height: 64px;
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
+}
+
+.table-search-header a {
+    color: #000;
+    line-height: 64px;
+    transition: all .3s linear;
+}
+
+.table-search-header a:hover {
+    color: #007bff;
+}
+.mt-24 {
+    margin-top: 24px;
+}
+.my-24 {
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+.py-24 {
+    padding-top: 24px;
+    padding-bottom: 24px;
+}
+.p-24 {
+    padding: 24px;
+}

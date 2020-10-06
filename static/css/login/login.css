@@ -1,0 +1,21 @@
+html, body {
+    height: 100%;
+}
+
+.my-login {
+    height: 100%;
+    padding-top: 200px;
+    background: url(../../images/login/bg.png) no-repeat center center fixed;
+    /*background-color: #d7d7d7;*/
+    background-size: 100% 100%;
+}
+
+.my-login section {
+    width: 368px;
+    margin: 0 auto;
+}
+
+.my-login .form-control {
+    color: #fff;
+    background-color: transparent;
+}

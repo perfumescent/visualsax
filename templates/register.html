@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SAX Visualization-Register</title>
+</head>
+<body>
+
+<a href="{{url_for('homepage')}}">Homepage</a>
+<br><br>
+
+{% if request.cookies.get('username') %}
+
+    <h3>{{ request.cookies.get('username') }}, welcome back to the great SAX Visualization!</h3>
+
+{% else %}
+
+
+    {% for message in get_flashed_messages() %}
+        <li>{{ message }}</li>
+    {% endfor %}
+
+
+    <form action="{{ url_for('register') }}" method="POST">
+        <label for="id">Username:</label>
+        <input type="text" name="username" id="id" placeholder="less than 40 bytes"><br>
+        <label for="psw">Password:</label>
+        <input type="password" name="password" id="psw" placeholder="less than 40 bytes"><br>
+        <input type="submit" value="Submit"><br>
+    </form>
+
+{% endif %}
+
+</body>
+</html>

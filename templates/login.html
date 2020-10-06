@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SAX Visualization-Login</title>
+</head>
+<body>
+
+<a href="{{url_for('homepage')}}">Homepage</a>
+<br><br>
+
+    {% for message in get_flashed_messages() %}
+        <li>{{ message }}</li>
+    {% endfor %}
+
+    <form method="POST">
+        <label for="id">Username:</label>
+        <input type="text" name="username" id="id"><br>
+        <label for="psw">Password:</label>
+        <input type="password" name="password" id="psw"><br>
+        <input type="submit" value="Enter"><br>
+    </form>
+
+    <a href="{{ url_for("register") }}" class="button"><button>Register</button></a>
+
+</body>
+</html>

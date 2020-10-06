@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="../static/images/logo.svg" type="image/x-icon"/>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/static/css/bootstrap/bootstrap.min.css">
+    <!-- iconfont CSS -->
+    <link rel="stylesheet" href="/static/font/iconfont.css">
+    <!-- Bootstrap Table Font CSS -->
+    <link rel="stylesheet" href="/static/font/fontawesome-free-5.11.2-web/css/all.min.css">
+    <!-- Bootstrap Table CSS -->
+    <link rel="stylesheet" href="/static/css/bootstrap-table/bootstrap-table.min.css">
+    <!-- My Style CSS -->
+    <link rel="stylesheet" href="/static/css/table-search/table-search.css">
+
+    <title>SAX Visualization-Initialize Parameter</title>
+
+    <style>
+
+        input::-webkit-input-placeholder {
+            opacity: 0.4 !important;
+        }
+    </style>
+</head>
+
+<body>
+<section class="table-search-header">
+    <div class="container-fluid h-100 d-flex justify-content-end align-items-center">
+        <h4 class="my-0 mr-md-auto font-weight-normal text-primary"  style="display: flex;align-items: center;">Initialize Parameters&nbsp;
+            <a style="font-size: small;color: darkgray" data-toggle="collapse" href="" onclick="$('#collapseExample').fadeToggle(800);" role="button"
+               aria-expanded="false" aria-controls="collapseExample">
+                <svg class="bi bi-info-circle" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor">
+                    <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z"
+                          clip-rule="evenodd"/>
+                    <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
+                    <circle cx="8" cy="4.5" r="1"/>
+                </svg>
+            </a>
+        </h4>
+        <a class="text-capitalize text-decoration-none ml-3" href="{{ url_for('homepage') }}"><i
+                class="iconfont icon-home"></i> home page</a>
+        <a class="text-capitalize text-decoration-none ml-3" href="{{ url_for('profile') }}"><i
+                class="iconfont icon-user"></i> user profile</a>
+        <a class="text-capitalize text-decoration-none ml-3" href="{{ url_for('train') }}"><i
+                class="iconfont icon-plane"></i> SAX-VSM</a>
+        <a class="text-capitalize text-decoration-none ml-3" href="{{ url_for('logout') }}"><i
+                class="iconfont icon-logout"></i> log out</a>
+    </div>
+</section>
+
+<section class=" container-fluid mt-24">
+<div class="collapse bg-white p-24 shadow-sm" id="collapseExample">
+            <div class="card card-body alert-light">
+                For visualization of a time series instance, you have to input these parameters:<br><br>
+                <b>Instance id:</b> the index of the time series variable/instance within a dataset
+                <b>PAA size:</b> the number of segments during PAA
+                <b>Alphabet size:</b> the number of SAX symbols
+                <b>Sliding window size:</b> the number of points on the original time series
+                <br><br>
+                For distance measure between a pair of time series sequences, you have to input these parameters:<br><br>
+                <b>Sequence length:</b> the number of points in one of the sequences
+                <b>Sequence start:</b> the index of the first points in both two sequences
+                <b>A instance id:</b> the index of the first sequence
+                <b>B instance id:</b> the index of the second sequence
+            </div>
+        </div>
+</section>
+
+<section class=" container-fluid mt-24">
+
+    <form method="post" enctype="multipart/form-data" class="bg-white py-24 shadow" style="padding-bottom: 0">
+        <div class="form-row justify-content-center ">
+            <div class="form-group col-sm-2 mb-0">
+                <label class="text-capitalize" for="filename"></label>
+                <div id="filename">
+                    <h5 class="text-primary" style="opacity: 0.95;overflow-scrolling: auto;padding-top: 38px">
+                        {{ "".join(session['filename'].split('_')[1:])[:-4] }}</h5>
+
+                </div>
+            </div>
+            <div class="form-group col-sm-2 mb-0">
+                <label class="text-capitalize" for="instance">instance id</label>
+                <input type="text" name="index" placeholder="0 ~ {{ session['row'] }}" class="form-control" id="index">
+            </div>
+            <div class="form-group col-sm-2 mb-0">
+                <label class="text-capitalize" for="instance">PAA size</label>
+                <input type="text" name="pairwise_size" placeholder="0 ~ {{ session['col'] }}" class="form-control"
+                       id="pairwise_size">
+            </div>
+            <div class="form-group col-sm-2 mb-0">
+                <label class="text-capitalize" for="instance">alphabet size</label>
+                <input type="text" name="alphabet_size" placeholder="2 ~ 20" class="form-control" id="alphabet_size">
+            </div>
+            <div class="form-group col-sm-2 mb-0">
+                <label class="text-capitalize" for="instance">sliding window size</label>
+                <input type="text" name="window_size" placeholder="0 ~ {{ session['col'] }}" class="form-control"
+                       id="window_size">
+            </div>
+            <div class="form-group col-sm-1 mb-0">
+                <label class="text-white" for="instance"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                <button type="submit" class="btn btn-primary text-capitalize">visualize</button>
+            </div>
+            {#            <div class="col-sm-1 align-self-end">#}
+            {#                <button type="submit"  class="btn btn-outline-primary text-capitalize">visualize</button>#}
+            {#            </div>#}
+
+        </div>
+    </form>
+    <form method="post" enctype="multipart/form-data" class="bg-white py-24 shadow"
+          style="padding-top: 0;padding-bottom: 34px">
+        <div class="form-row justify-content-center" style="margin-top: -18px">
+
+            <div class="form-group col-sm-2 mb-0">
+                {#                <label class="text-capitalize" for="filename"></label>#}
+                <div id="filename">
+
+                </div>
+            </div>
+            <div class="form-group col-sm-2 mb-0">
+                <label class="text-capitalize" for="instance">sequence length</label>
+                <input type="text" name="length" placeholder="0 ~ {{ session['col'] }}" class="form-control" id="index">
+            </div>
+            <div class="form-group col-sm-2 mb-0">
+                <label class="text-capitalize" for="instance">sequence start</label>
+                <input type="text" name="start" placeholder="0 ~ {{ session['col'] }}" class="form-control"
+                       id="pairwise_size">
+            </div>
+            <div class="form-group col-sm-2 mb-0">
+                <label class="text-capitalize" for="instance">a instance id</label>
+                <input type="text" name="a_id" placeholder="0 ~ {{ session['row'] }}" class="form-control"
+                       id="alphabet_size">
+            </div>
+            <div class="form-group col-sm-2 mb-0">
+                <label class="text-capitalize" for="instance">b instance id</label>
+                <input type="text" name="b_id" placeholder="0 ~ {{ session['row'] }}" class="form-control"
+                       id="window_size">
+            </div>
+            <div class="col-sm-1 align-self-end">
+                <button type="button" class="btn btn-light text-capitalize" data-toggle="modal"
+                        data-target="#distanceModal">distance
+                </button>
+            </div>
+
+        </div>
+
+        <!-- distanceModal -->
+        <div class="modal fade" id="distanceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                        <h5 class="modal-title text-capitalize" id="exampleModalLabel">need to reset these sizes?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group row my-4">
+                            <label for="inputUsername" class="col-sm-4 col-form-label text-capitalize">PAA
+                                size</label>
+                            <input type="text" name="pairwise_size" class="form-control col-sm-6" id="inputUsername">
+                        </div>
+                        <div class="form-group row my-4">
+                            <label for="inputPassword3" class="col-sm-4 col-form-label text-capitalize">Alphabet
+                                size</label>
+                            <input type="text" name="alphabet_size" class="form-control col-sm-6" id="inputPassword3">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Measure Distance</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+
+<section class="container-fluid mt-24 ">
+    <div class="bg-white p-24 shadow-sm">
+        <h5 class="text-capitalize" style="display: flex;align-items: center;">Dataset Preview&nbsp;&nbsp;
+            <a style="font-size: small;color: darkgray" data-toggle="collapse" href="#collapseExample1" role="button"
+               aria-expanded="false" aria-controls="collapseExample1">
+                <svg class="bi bi-info-circle" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor">
+                    <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z"
+                          clip-rule="evenodd"/>
+                    <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
+                    <circle cx="8" cy="4.5" r="1"/>
+                </svg>
+            </a>
+        </h5>
+
+        <div class="collapse" id="collapseExample1">
+            <div class="card card-body alert-light">
+                This is a simple preview of the dataset you are using now. If the dataset has
+                more than 41 columns, the table will only show the first 21 columns and the last 20 ones.
+            </div>
+        </div>
+        <!-- Dataset Table -->
+        <table id="my-table"></table>
+    </div>
+</section>
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="/static/js/bootstrap/jquery-3.4.1.min.js"></script>
+<script src="/static/js/bootstrap/bootstrap.bundle.min.js"></script>
+<script src="/static/js/bootstrap/bootstrap.min.js"></script>
+<!-- Bootstrap-Table JS -->
+<script src="/static/js/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="/static/js/bootstrap-table/extensions/export/bootstrap-table-export.min.js"></script>
+
+<script>
+    $.ajax({
+        type: 'GET',
+        url: "{{ url_for('get_dataset') }}",
+        success: (res) => {
+            let data = JSON.parse(res.data)
+            let tableCol = data[0]
+            let columns = Object.keys(tableCol).map(v => ({
+                field: v,
+                title: v,
+            }))
+            $('#my-table').bootstrapTable({
+                data,
+                queryParams: "queryParams",
+                toolbar: '#toolbar',                //工具按钮用哪个容器
+                height: 670,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+                uniqueId: "ID",
+                pageSize: "10",
+                pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+                pagination: true, // 是否分页
+                search: true,//是否显示搜索
+                showRefresh: true,//是否显示刷新
+                showToggle: true,//是否显示 切换试图（table/card）按钮
+                showFullscreen: true,//全屏
+                //showExport: true, //导出
+                showColumns: true,//筛选列头
+                showColumnsToggleAll: true,//筛选列头全选
+                singleSelect: true, // 单选checkbox
+                showPaginationSwitch: true,//是否显示 数据条数选择框
+                columns
+            });
+        }
+    })
+</script>
+
+</body>
+
+</html>

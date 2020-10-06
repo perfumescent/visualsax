@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>SAX Visualization-Welcome</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">
+</head>
+<body>
+
+<ul>
+    <h2>{{ session['username'] }}, welcome back to the great SAX Visualization!</h2>
+    <a href="{{ url_for("profile") }}" class="button"><button>Get start</button></a>
+    <a href="{{ url_for("logout") }}" class="button"><button>Log out</button></a>
+</ul>
+
+</body>
+</html>

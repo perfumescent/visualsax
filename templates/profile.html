@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>SAX Visualization-User Profile</title>
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
+</head>
+
+<body>
+
+<a href="{{ url_for('homepage') }}">Homepage</a>
+<a href="{{ url_for('logout') }}">Log out</a>
+<br><br><br><br>
+
+<form method='post' enctype=multipart/form-data>
+
+    <div class="layui-form-item">
+        <div class="layui-input-inline">
+            <label class="layui-input layui-bg-gray" for="xFile"></label>
+            <input type='file' name=file id="xFile" style="position:absolute;clip:rect(0 0 0 0);">
+        </div>
+        <div class="layui-input-inline">
+            <input type='submit' value=Upload class="layui-btn layui-bg-green">
+        </div>
+    </div>
+    Only accept .csv file
+</form>
+<br><br><br><br>
+
+{% if history %}
+    <h1>This is a table showing the visualization history</h1>
+{% endif %}
+<br><br>
+<form method="post">  <!-- 指定提交方法为 POST -->
+    <label for="record">Select a record:</label>
+    <input type="text" name="record" id="record"> <!-- 文本输入框 -->
+    <input type="submit" name="submit" value="Analyze">  <!-- 提交按钮 -->
+</form>
+{% for i in history %}
+    Record: {{ i['no'] }}&emsp;
+    Filename: {{ i['filename'] }}&emsp;
+    Index: {{ i['idx'] }}&emsp;
+    Paa_size: {{ i['paa_size'] }}&emsp;
+    Sax_size:{{ i['sax_size'] }}&emsp;
+    Sliding_size: {{ i['sliding_size'] }}
+    <br>
+{% endfor %}
+
+</body>
+
+<script src="/static/layui/layui.js">
+    layui.use('layer', function () {
+        var layer = layui.layer;
+        layer.msg('hello');
+    });
+</script>
+
+</html>
